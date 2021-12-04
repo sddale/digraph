@@ -105,13 +105,13 @@ class csrgraph {
         }
 
         // Test if two nodes are connected by d. Edge must have val d to return true
-        bool areConnected(const N& n1, const N& n2, A& d) const {
-          auto c = connections(n1);
-          auto q = find(c.begin(), c.end(), {n2, d}); //TODO: switch to hashtable for faster find
+        const bool areConnected(const N& n1, const N& n2, A& d) {
+          const auto c = connections(n1);
+          const auto q = std::find_if(c.begin(), c.end(), [&n2](auto& i){return (i.first == n2);}); //TODO: switch to hashtable for faster find
           return (q == c.end() ? false : true);
         }
 
-        bool areConnected(const N& n1, const N& n2) const {
+        bool areConnected(const N& n1, const N& n2) {
           A d;
           return areConnected(n1, n2, d);
         }
@@ -147,6 +147,12 @@ class csrgraph {
     // Add node to graph's internal structure
     csrgraph& add(N n) {
       fContent->add(n);
+      return *this;
+    }
+
+    csrgraph& add(const N& n1, const N& n2) {
+      A d = 0;
+      fContent->add(n1, n2, d);
       return *this;
     }
 

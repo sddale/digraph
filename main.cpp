@@ -75,6 +75,8 @@ int main(int, const char**)
     g2.add('f', 't', 1);
     g2.add('r', 'f', 3);
     g2.add('z', 'y', 1);
+    g2.add('x');
+    g2.add('m', 'p');
     std::cout << "Graph g2:\n";
     std::cout << g2;
 
@@ -83,5 +85,8 @@ int main(int, const char**)
     csrgraph<char, int> g3 = g1 + g2;
     std::cout << "Graph g3:\n";
     std::cout << g3;
+
+    std::cout << "Are d & g connected? " << std::boolalpha << g3.areConnected('d', 'g') << '\n';
+    std::cout << "Are c & y connected? " << std::boolalpha << g3.areConnected('c', 'y') << '\n';
     return 0;
 }
