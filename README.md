@@ -1,5 +1,9 @@
 # Digraph library ![Build GH Status](https://github.com/grame-cncm/digraph/workflows/compile-test/badge.svg)
 
+This is a fork of the Digraph library by Grame. As a personal project, I have added a new graph class utilizing novel compressed sparse row storage. Unlike CSR graphs in larger libraries, such as Boost, my CSR class is read-write. Abseil `flat_hash_maps` are used for cache-friendly reads in spirit with traditional raw-array CSR implementations. While writes require considerably more work than in a adjacency-list model, reads should prove to be faster, at scale, and memory usage should be lower.
+
+This project is in it's infancy and just for fun. Benchmarks to follow.
+
 **Digraph** is a very simple, C++ 11 template-based, directed graph library. It is not designed to be general, but to suit the needs of the (next) Faust compiler.
 
 It is made of five files:
@@ -14,7 +18,7 @@ It is made of five files:
 ## Building a digraph
 A **digraph** is a directed graph. It is composed of a set of nodes `{n_1,n_2,...}` and a set of connections (i.e. arrows) between these nodes `{(n_i -a-> n_j),...}`.
 
-For a connection `(n_i -a-> n_j)`, the node `n_i` is the source of the connection, the node `n_j` is the destination of the connections, and `a` is the value of the connection. 
+For a connection `(n_i -a-> n_j)`, the node `n_i` is the source of the connection, the node `n_j` is the destination of the connections, and `a` is the value of the connection.
 
 The API to create a graph is very simple. You start by creating an empty graph:
 
@@ -67,12 +71,12 @@ The Tarjan class has essentially two methods:
 
 #### Partition
 
-The method `partition()` returns the partition of the graph into strongly connected components. 
+The method `partition()` returns the partition of the graph into strongly connected components.
 
 	partition() -> set<set<N>>&
 
 The result is a set of set on nodes.  Each set of nodes represents a strongly connected component of the graph.
-  
+
 #### Cycles
 The method `cycles()` returns the number of cycles of the graph.
 
@@ -111,7 +115,7 @@ The function `mapnodes()` creates a copy of the input graph in which each node i
 
 
 ### Map connections
-The function `mapconnections()` creates a copy of the input graph in which only the connections that satisfy the predicate `f()` are kept. 
+The function `mapconnections()` creates a copy of the input graph in which only the connections that satisfy the predicate `f()` are kept.
 
 	mapconnections(const digraph<N,A>&, f:(N,N,int)->bool) -> digraph<N,A>
 
