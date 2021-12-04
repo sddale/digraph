@@ -1,7 +1,7 @@
 # Digraph library ![Build GH Status](https://github.com/grame-cncm/digraph/workflows/compile-test/badge.svg)
 
 ## Compressed Sparse Row Fork
-This is a fork of the **Digraph** library by Grame. As a personal project, I added a new graph class utilizing novel compressed sparse row storage. Unlike CSR graphs in larger libraries, such as Boost, **csrgraph** is read-write. Abseil `absl::flat_hash_maps` are used for cache-friendly reads in spirit with traditional raw-array CSR implementations. While writes require considerably more work here than with an adjacency-list, reads should prove to be faster (at scale) due to a lower frequency of cache-misses and a lack of pointer-chasing. Memory usage should be lower as well.
+This is a fork of the **Digraph** library by Grame. As a personal project, I added a new graph class utilizing novel compressed sparse row storage. Unlike CSR graphs in larger libraries, such as Boost, **csrgraph** is read-write. Abseil `absl::flat_hash_maps` are used for cache-friendly reads in the spirit of traditional raw-array CSR implementations. While writes require considerably more work here than with an adjacency-list, reads should prove to be faster (at scale) due to a lower frequency of cache-misses and a lack of pointer-chasing. Memory usage should be lower as well.
 
 This project is in it's infancy and just for fun. Benchmarks to follow.
 
